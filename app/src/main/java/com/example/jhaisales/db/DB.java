@@ -117,6 +117,20 @@ public class DB extends SQLiteOpenHelper {
         }
     }
 
+    public boolean insertarPedido(String nombreProduco, int numeroPedido, int idProducto, String categoria){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put("nombreProducto", nombreProduco);
+        cv.put("numeroPedido", numeroPedido);
+        cv.put("idProducto", idProducto);
+        cv.put("categoria", categoria);
+
+        long result = sqLiteDatabase.insert(TABLE_PARTIDAS, null, cv);
+
+        return (result != -1);
+    }
+
     public boolean checkpass(String password, String nombre) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery("Select * from usuario Where nombre=? and password = ?", new String[]{nombre, password});
@@ -164,6 +178,31 @@ public class DB extends SQLiteOpenHelper {
                 datos.setColumna3(cursor.getString(4));
                 datos.setColumna4(cursor.getString(5));
                 datos.setColumna5(cursor.getString(6));
+
+                listadatos.add(datos);
+            } while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        return listadatos;
+    }
+
+    public ArrayList<Datos> mostrarPedidos() {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ArrayList<Datos> listadatos = new ArrayList<>();
+        Datos datos = null;
+        Cursor cursor = null;
+        cursor = database.rawQuery("SELECT * FROM " + TABLE_PARTIDAS, null);
+        if (cursor.moveToFirst()) {
+            do {
+                datos = new Datos();
+                datos.setId(cursor.getInt(0));
+                datos.setColumna1(cursor.getString(1));
+                datos.setColumna2(cursor.getString(3));
+                datos.setColumna3(cursor.getString(4));
+//                datos.setColumna4(cursor.getString(5));
+//                datos.setColumna5(cursor.getString(6));
 
                 listadatos.add(datos);
             } while (cursor.moveToNext());

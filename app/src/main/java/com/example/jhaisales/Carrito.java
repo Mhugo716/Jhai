@@ -39,4 +39,10 @@ public class Carrito {
             editor.commit();
 
         }
+
+        public void vaciar(){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove("carrito");
+            editor.commit(); editor.apply();
+        }
 }

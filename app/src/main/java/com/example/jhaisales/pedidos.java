@@ -19,11 +19,11 @@ import java.util.ArrayList;
 
 
 public class pedidos extends Fragment {
-
     private FragmentPedidosBinding binding;
-    DB db;
-    ArrayList datos;
-    RecyclerView recyclerView;
+    private DB db;
+    private ArrayList datos;
+    private RecyclerView recyclerView;
+
 
 
     @Override
@@ -46,8 +46,8 @@ public class pedidos extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerViewPedido);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-
-
+        AdapterPD adapterPD = new AdapterPD(db.mostrarPedidos(), getContext());
+        recyclerView.setAdapter(adapterPD);
         return root;
     }
 }

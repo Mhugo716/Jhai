@@ -41,16 +41,17 @@ public class AdapterPD extends RecyclerView.Adapter<AdapterPD.ViewHolder> {
 
         holder.id.setText(String.valueOf(lista.get(position).getId()));
         holder.columna1.setText(lista.get(position).getColumna1());
-        holder.columna2.setText(lista.get(position).getColumna2());
-        holder.columna3.setText(lista.get(position).getColumna3());
-        Log.e("cantidadRV", String.valueOf(lista.get(position).getCantidad()));
-        holder.cantidad.setText("" + lista.get(position).getCantidad());
+        holder.columna2.setText(lista.get(position).getColumna3());
+        holder.columna3.setText("");
+//        holder.columna3.setText(lista.get(position).getColumna3());
+//        Log.e("cantidadRV", String.valueOf(lista.get(position).getCantidad()));
+//        holder.cantidad.setText("" + lista.get(position).getCantidad());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return lista.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,16 +68,16 @@ public class AdapterPD extends RecyclerView.Adapter<AdapterPD.ViewHolder> {
             columna3 = View.findViewById(R.id.price);
             imagen = View.findViewById(R.id.product_imag);
             cantidad = View.findViewById(R.id.cantidadproduct);
-            btnComprarP = View.findViewById(R.id.btnComprar);
+//            btnComprarP = View.findViewById(R.id.btnComprar);
 
-            btnComprarP.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(android.view.View v) {
-                    Context context = v.getContext();
-                    Intent i = new Intent(context, pedidos.class);
-                    i.putExtra("idProducto", lista.get(getAdapterPosition()).getId());
-                }
-            });
+//            btnComprarP.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(android.view.View v) {
+//                    Context context = v.getContext();
+//                    Intent i = new Intent(context, pedidos.class);
+//                    i.putExtra("idProducto", lista.get(getAdapterPosition()).getId());
+//                }
+//            });
         }
     }
 }
