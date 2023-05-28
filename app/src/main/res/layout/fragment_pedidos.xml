@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Encabezado de la vista -->
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lista de Pedidos"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:padding="16dp"
+        android:textColor="@android:color/black" />
+
+    <!-- RecyclerView para la lista de pedidos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPedido"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+
+    <!-- Pie de página de la vista -->
+    <TextView
+        android:id="@+id/textViewPie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total de pedidos: 0"
+        android:textSize="18sp"
+        android:padding="16dp"
+        android:background="@color/cat"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

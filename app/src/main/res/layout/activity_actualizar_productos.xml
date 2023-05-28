@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actualizar_productos">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgPA"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="15dp"
+            android:src="@android:drawable/ic_menu_camera" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnimagenA"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/gris"
+                android:text="Subir Imagen" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="180dp"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/nombrePA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/styledit"
+            android:ems="10"
+            android:hint="Nombre Del Producto"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/marcaA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/styledit"
+            android:ems="10"
+            android:hint="marca"
+            android:inputType="text"
+            android:textAlignment="center" />
+
+
+        <EditText
+            android:id="@+id/precioA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/styledit"
+            android:ems="10"
+            android:hint="Precio"
+            android:inputType="numberDecimal"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/descripcionA"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/styleditdos"
+            android:ems="10"
+            android:hint="Descripción"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+
+
+
+        <EditText
+            android:id="@+id/categoriaA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/styledit"
+            android:ems="10"
+            android:hint="Categoria"
+            android:inputType="textPersonName"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnRegisProducA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/gris"
+            android:onClick="registroProducto"
+            android:text="Actualizar"
+            />
+
+        <Button
+            android:id="@+id/btnEliminar"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:backgroundTint="@color/gris"
+            android:text="Eliminar" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

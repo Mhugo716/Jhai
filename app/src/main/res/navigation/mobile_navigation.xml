@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.jhaisales.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.jhaisales.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.jhaisales.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_avon2"
+        android:name="com.example.jhaisales.ui.nav_avon"
+        android:label="nav_avon"
+        tools:layout="@layout/nav_avon" />
+    <fragment
+        android:id="@+id/nav_andrea"
+        android:name="com.example.jhaisales.nav_andrea"
+        android:label="fragment_nav_andrea"
+        tools:layout="@layout/fragment_nav_andrea" />
+    <fragment
+        android:id="@+id/nav_betteware"
+        android:name="com.example.jhaisales.nav_betteware"
+        android:label="fragment_nav_betteware"
+        tools:layout="@layout/fragment_nav_betteware" />
+    <fragment
+        android:id="@+id/nav_fuller"
+        android:name="com.example.jhaisales.nav_fuller"
+        android:label="fragment_nav_fuller"
+        tools:layout="@layout/fragment_nav_fuller" />
+    <fragment
+        android:id="@+id/nav_vianney"
+        android:name="com.example.jhaisales.nav_vianney"
+        android:label="fragment_nav_vianney"
+        tools:layout="@layout/fragment_nav_vianney" />
+    <fragment
+        android:id="@+id/nav_ilusion"
+        android:name="com.example.jhaisales.nav_ilusion"
+        android:label="fragment_nav_ilusion"
+        tools:layout="@layout/fragment_nav_ilusion" />
+    <fragment
+        android:id="@+id/pedidos"
+        android:name="com.example.jhaisales.pedidos"
+        android:label="pedidos" />
+
+</navigation>
