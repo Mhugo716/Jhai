@@ -22,8 +22,14 @@ import com.example.jhaisales.db.AdapterPV;
 import com.example.jhaisales.db.DB;
 import com.example.jhaisales.db.Datos;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
+
+import kotlin.text.Regex;
 
 public class carritoCompras extends AppCompatActivity {
 
@@ -35,15 +41,15 @@ public class carritoCompras extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    Button btnCompra, btnEliminar;
+    private Button btnCompra, btnEliminar;
 
-    TextView eliminarCarrito;
+    private TextView eliminarCarrito;
 
-    ImageView atras;
+    private ImageView atras;
 
-    private ArrayList<Datos> productos, carrito;
+    private ArrayList<Datos> productos;
 
-
+    private Carrito carrito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,75 +63,72 @@ public class carritoCompras extends AppCompatActivity {
         db = new DB(this);
 
 
-        Carrito carrito = new Carrito(this);
-        Set<String> carrito_productos = carrito.getProductos();
+        carrito = new Carrito(this);
+        Set<String> carrito_productos = carrito.getProductos(); //Obtienes los productos
 
-            productos = new ArrayList<>();
-        for(String id: carrito_productos){
+        productos = new ArrayList<>(); //Inicializas el arreglo que contendra los productos que tiene el carrito
+
+        for(String id: carrito_productos){ //Recorres el arreglo que regreso la clase carrito
             String[] auxiliar = id.split(";");
-
             Log.e("Info", auxiliar[0] + " " + auxiliar[1]);
 
-            Datos nomProducto = db.mostrarproducto((auxiliar[0]));
-
+            Datos nomProducto = db.mostrarproducto((auxiliar[0]));//Extraemos el producto segun su id
             if (nomProducto != null){
                 nomProducto.setCantidad(Integer.parseInt(auxiliar[1]));
-                productos.add(nomProducto);
+                productos.add(nomProducto); //Arreglo con los productos
             }else{
                 Log.e("Error", "El prodcuto con ID " + auxiliar[0] + "no existe");
             }
 
-            //nomProducto.setCantidad(Integer.parseInt(auxiliar[1]));
-
-            //productos.add(nomProducto);
-
         }
 
+        //Inicializar las opciones del recyclerview
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         AdapterPV adapter = new AdapterPV(productos, this);
         recyclerView.setAdapter(adapter);
 
-        btnCompra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              imprimirTicketDeCompra();
-            }
-        });
+
+        btnCompra.setOnClickListener(view ->{imprimirTicketDeCompra();});
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Set<String> prodcutos = carrito.getProductos();
-               Log.e("Info","Cantidad de productos antes de limpiar: " + prodcutos.size());
-               prodcutos.clear();
-               adapter.notifyDataSetChanged();
-               Log.e("Info", "Cantidad de productos despues de limpiar: " + prodcutos.size());
+                int size =  productos.size();
+                productos.clear();
+                adapter.notifyItemRangeRemoved(0, size);
+                carrito.vaciar();
+
+               //Set<String> prodcutos = carrito.getProductos(); //¿?
+
+               Log.e("Info","Cantidad de productos antes de limpiar: " + productos.size());
+               //prodcutos.clear();
+
+               //adapter.notifyDataSetChanged();
+               Log.e("Info", "Cantidad de productos despues de limpiar: " + productos.size());
 
                Intent intent = new Intent(carritoCompras.this, home.class);
                startActivity(intent);
             }
         });
 
-        atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(carritoCompras.this, home.class);
-                startActivity(i);
-            }
+        atras.setOnClickListener(view -> {
+            Intent i = new Intent(carritoCompras.this, home.class);
+            startActivity(i);
         });
     }
 
     private void imprimirTicketDeCompra() {
         PrintHelper printHelper = new PrintHelper(carritoCompras.this);
-
         printHelper.setScaleMode(PrintHelper.SCALE_MODE_FIT);
         printHelper.setColorMode(PrintHelper.COLOR_MODE_MONOCHROME);
 
         printHelper.printBitmap("Ticket de compra", generarBitmapDelTicket(), new PrintHelper.OnPrintFinishCallback() {
             @Override
             public void onFinish() {
+                insertPedido();
                 Toast.makeText(carritoCompras.this, "Ticket impreso", Toast.LENGTH_SHORT).show();
+
+                finish();
             }
         });
 
@@ -154,5 +157,18 @@ public class carritoCompras extends AppCompatActivity {
         canvas.drawText("Total De Compra     "+ precio, 100, y+50, paint);
 
         return bitmap;
+    }
+
+    private void insertPedido(){
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm", Locale.getDefault());
+        String formattedDate = df.format(c);
+
+        String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' ']", "");
+        Log.e("numeropedido", nuevacadena);
+
+        for (Datos producto: productos) {
+            db.insertarPedido(producto.getColumna1(), Integer.parseInt(nuevacadena), producto.getId(), producto.getColumna4());
+        }
     }
 }

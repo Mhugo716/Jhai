@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,11 @@ import com.example.jhaisales.databinding.ActivityRegistroBinding;
 import com.example.jhaisales.databinding.ActivityVistaProductoBinding;
 import com.example.jhaisales.db.DB;
 import com.example.jhaisales.db.Datos;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class vistaProducto extends AppCompatActivity {
 
@@ -164,9 +170,10 @@ public class vistaProducto extends AppCompatActivity {
             printHelper.printBitmap("Ticket de compra", generarBitmapDelTicket(nombreProducto.getText().toString(),precioV.getText().toString()), new PrintHelper.OnPrintFinishCallback() {
                 @Override
                 public void onFinish() {
+                    insertPedido();
 
                     Toast.makeText(vistaProducto.this, "Ticket impreso", Toast.LENGTH_SHORT).show();
-
+                    finish();
                 }
             });
 
@@ -187,5 +194,16 @@ public class vistaProducto extends AppCompatActivity {
         canvas.drawText("Total De Compra     "+ precio, 100, 250, paint);
         return bitmap;
 
+    }
+
+    private void insertPedido(){
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm", Locale.getDefault());
+        String formattedDate = df.format(c);
+
+        String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' ']", "");
+        Log.e("numeropedido", nuevacadena);
+
+        db.insertarPedido(datos.getColumna1(), Integer.parseInt(nuevacadena), datos.getId(), datos.getColumna4());
     }
 }

@@ -113,12 +113,12 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
                 }
             });
 
-            btnDatosCliente.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(android.view.View v) {
-
-                }
-            });
+//            btnDatosCliente.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(android.view.View v) {
+//
+//                }
+//            });
 
         }
     }
