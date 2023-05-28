@@ -46,8 +46,7 @@ public class pedidos extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerViewPedido);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        AdapterPD adapterPD = new AdapterPD(db.mostrarproducto(),getContext());
-        recyclerView.setAdapter(adapterPD);
+
 
         return root;
     }
