@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DB extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 15;
     private static final String DATABASE_NOMBRE = "jhai.db";
     private static final String TABLE_USUARIOS = "usuario";
 
@@ -55,10 +55,16 @@ public class DB extends SQLiteOpenHelper {
                 "numeroPedido INTEGER NOT NULL, " +
                 "idProducto INTEGER NOT NULL," +
                 "categoria TEXT NOT NULL," +
-                "FOREIGN KEY('nombreProducto') REFERENCES " +
-                TABLE_PARTIDAS + "('nombreProducto')," +
-                "FOREIGN KEY('idProducto') REFERENCES " +
-                TABLE_PARTIDAS + "('idProducto'))");
+                "precio DOUBLE NOT NULL," +
+                "imgProducto BLOB NOT NULL," +
+                "FOREIGN KEY(nombreProducto) REFERENCES " +
+                TABLE_PARTIDAS + "(nombreProducto)," +
+                "FOREIGN KEY(idProducto) REFERENCES " +
+                TABLE_PARTIDAS + "(idProducto), " +
+                "FOREIGN KEY(precio) REFERENCES " +
+                TABLE_PARTIDAS + "(precio)," +
+                "FOREIGN KEY(imgProducto) REFERENCES " +
+                TABLE_PARTIDAS + "(imgProducto))");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CLIENTE + "(" +
                 "idCliente integer PRIMARY KEY AUTOINCREMENT, " +
@@ -117,7 +123,7 @@ public class DB extends SQLiteOpenHelper {
         }
     }
 
-    public boolean insertarPedido(String nombreProduco, int numeroPedido, int idProducto, String categoria){
+    public boolean insertarPedido(String nombreProduco, int numeroPedido, int idProducto, String categoria, String precio,  byte[] imagen){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -125,6 +131,8 @@ public class DB extends SQLiteOpenHelper {
         cv.put("numeroPedido", numeroPedido);
         cv.put("idProducto", idProducto);
         cv.put("categoria", categoria);
+        cv.put("precio", precio);
+        cv.put("imgProducto", imagen);
 
         long result = sqLiteDatabase.insert(TABLE_PARTIDAS, null, cv);
 
@@ -162,14 +170,17 @@ public class DB extends SQLiteOpenHelper {
 
 
     public ArrayList<Datos> mostrartodoProductos() {
+
         SQLiteDatabase database = this.getWritableDatabase();
 
         ArrayList<Datos> listadatos = new ArrayList<>();
         Datos datos = null;
         Cursor cursor = null;
         cursor = database.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS, null);
+
         if (cursor.moveToFirst()) {
             do {
+
                 datos = new Datos();
                 datos.setId(cursor.getInt(0));
                 datos.setColumna1(cursor.getString(1));
@@ -180,9 +191,11 @@ public class DB extends SQLiteOpenHelper {
                 datos.setColumna5(cursor.getString(6));
 
                 listadatos.add(datos);
+
             } while (cursor.moveToNext());
 
         }
+
         cursor.close();
         return listadatos;
     }
@@ -199,10 +212,11 @@ public class DB extends SQLiteOpenHelper {
                 datos = new Datos();
                 datos.setId(cursor.getInt(0));
                 datos.setColumna1(cursor.getString(1));
-                datos.setColumna2(cursor.getString(3));
+                datos.setColumna2(cursor.getString(5));
                 datos.setColumna3(cursor.getString(4));
-//                datos.setColumna4(cursor.getString(5));
-//                datos.setColumna5(cursor.getString(6));
+                datos.setImagen(cursor.getBlob(6));
+  //              datos.setColumna4(cursor.getString(5));
+  //              datos.setColumna5(cursor.getString(6));
 
                 listadatos.add(datos);
             } while (cursor.moveToNext());
@@ -210,6 +224,7 @@ public class DB extends SQLiteOpenHelper {
         }
         cursor.close();
         return listadatos;
+
     }
 
     public Datos mostrarproducto(String id) {

@@ -53,6 +53,8 @@ public class GalleryFragment extends Fragment {
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        //Relacion con los componentes de la vista
         db = new DB(this.getContext());
         imgProducto = root.findViewById(R.id.imgP);
         nombreProducto = root.findViewById(R.id.nombreP);
@@ -72,6 +74,7 @@ public class GalleryFragment extends Fragment {
         @Override
         public void onClick(View view) {
 
+            //Seleccion de las columnas de la Tabla Prodcustos
             String nombre = binding.nombreP.getText().toString();
             String marca = binding.marca.getText().toString();
             String precio = binding.precio.getText().toString();
@@ -79,12 +82,14 @@ public class GalleryFragment extends Fragment {
             String categoria = binding.categoria.getText().toString();
             byte[] imagen = imageViewToByte(binding.imgP);
 
+            //Verifica si los campos estan vacios
             if (nombre.isEmpty() || marca.isEmpty() || precio.isEmpty() || descripcion.isEmpty() || categoria.isEmpty() || imagen == null) {
 
                 Toast.makeText(getActivity(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
 
             }else{
 
+                //Insersta los datos a la tabla de Productos
                 boolean insert = db.insertarProducto(nombre, marca, precio, descripcion, categoria, imagen);
                 if (insert){
 
@@ -107,6 +112,7 @@ public class GalleryFragment extends Fragment {
         }
     };
 
+    //Verifica si la aplicación tiene el permiso(permiso para leer el almacenamiento externo, como archivos en la tarjeta SD) concedido o no.
     View.OnClickListener onimagen = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -123,6 +129,7 @@ public class GalleryFragment extends Fragment {
         };
 
 
+    //Convierte una imagen representada por un objeto ImageView en un arreglo de bytes
     public static byte[] imageViewToByte(ImageView image) {
 
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
@@ -133,6 +140,7 @@ public class GalleryFragment extends Fragment {
 
     }
 
+    //Maneja la respuesta a la solicitud de permiso para acceder a la galería o selección de imágenes.
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
@@ -155,6 +163,7 @@ public class GalleryFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    //Maneja el resultado de la selección de una imagen de la galería.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 

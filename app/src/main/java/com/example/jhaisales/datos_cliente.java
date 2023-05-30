@@ -25,6 +25,7 @@ public class datos_cliente extends AppCompatActivity {
         binding = ActivityDatosClienteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+       //Relacion con los objetos de la vista
         db = new DB(this);
 
         btnDatosCliente = findViewById(R.id.btnCliente);
@@ -35,16 +36,24 @@ public class datos_cliente extends AppCompatActivity {
     View.OnClickListener cliente = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+            //Seleccion De columnas de la Tabla Clientes
             String nombreCliente = binding.etNombreC.getText().toString();
             String direccion = binding.etDireccion.getText().toString();
             String telefono = binding.etTelefono.getText().toString();
             String refencias = binding.etReferencias.getText().toString();
 
+            //Verifica si los campos estam vacios
             if (nombreCliente.isEmpty() || direccion.isEmpty() || telefono.isEmpty() || refencias.isEmpty()){
+
                 Toast.makeText(datos_cliente.this, "Campos vacios", Toast.LENGTH_SHORT).show();
+
             }else{
+
+                //Inserta los datos en la Tabla Clientes
                 boolean correct = db.insertCliente(nombreCliente,direccion,telefono,refencias);
                 if (correct == true){
+
                     Toast.makeText(datos_cliente.this, "Datos Guardados", Toast.LENGTH_SHORT).show();
 
                 }

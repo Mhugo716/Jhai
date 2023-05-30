@@ -25,14 +25,11 @@
         android:dividerHeight="1dp" />
 
     <!-- Pie de página de la vista -->
-    <TextView
-        android:id="@+id/textViewPie"
+    <Button
+        android:id="@+id/btnPedidos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total de pedidos: 0"
-        android:textSize="18sp"
-        android:padding="16dp"
-        android:background="@color/cat"
-        android:textColor="@android:color/white" />
+        android:text="Confirmar Pedidos"
+        android:textSize="18dp"/>
 
 </LinearLayout>

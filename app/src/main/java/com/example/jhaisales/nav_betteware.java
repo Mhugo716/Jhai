@@ -36,9 +36,11 @@ public class nav_betteware extends Fragment {
 
         date = new ArrayList<>();
 
+        //Relacion con el recyclerView de la vista
         recyclerView = root.findViewById(R.id.productosBetteware);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        //Manda a llamar al Adapter para visualizar los prodcutos en la pantalla con la funcion mostrarProductos
         AdapterP adapter = new AdapterP(db.mostrarBetteware(),getContext());
         recyclerView.setAdapter(adapter);
 

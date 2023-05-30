@@ -24,6 +24,7 @@ public class registro extends AppCompatActivity {
         binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Relacion con los objetos de la vista
         db = new DB(this);
         nombre = findViewById(R.id.etNombre);
         correo = findViewById(R.id.etCorreo);
@@ -38,20 +39,21 @@ public class registro extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
+            //Seleccion De columnas de la Tabla Usuarios
             String nombre = binding.etNombre.getText().toString();
             String correo = binding.etCorreo.getText().toString();
             String pass = binding.etPassword.getText().toString();
 
-            if(nombre.equals("") && correo.equals("") && pass.equals("")){
+            if(nombre.equals("") && correo.equals("") && pass.equals("")){//Verifica si los campos son vacios
 
                 Toast.makeText(registro.this, "Campos vacios", Toast.LENGTH_SHORT).show();
 
             }else {
 
-                boolean correcto = db.insertUsuario(nombre,correo,pass);
+                boolean correcto = db.insertUsuario(nombre,correo,pass);//Inserta los datos a la Tabla Usuarios
                 if(correcto == true){
 
-                    Toast.makeText(registro.this, "Registro completo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(registro.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
                     login();
 
                 }
@@ -59,7 +61,7 @@ public class registro extends AppCompatActivity {
         }
     };
 
-    public void login(){
+    public void login(){//Manda a llamar la Pantalla de Inicio de Sesion
         Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
     }

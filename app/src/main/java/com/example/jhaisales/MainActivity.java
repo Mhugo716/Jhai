@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Relacion con los objetos de la vista
+
         db = new DB(this);
 
         nombre =  findViewById(R.id.etNombreL);
@@ -41,25 +44,35 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener logeo = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+            //Seleccion De columnas de la Tabla Usuarios
             String nombre = binding.etNombreL.getText().toString();
             String pass = binding.etPasswordL.getText().toString();
-            if (nombre.equals("") && pass.equals("")){
+
+            if (nombre.equals("") && pass.equals("")){//Verifica si los campos son vacios
+
                 Toast.makeText(MainActivity.this, "Campos vacios", Toast.LENGTH_SHORT).show();
+
             }else{
-                boolean verifi = db.checkpass(pass,nombre);
+
+                boolean verifi = db.checkpass(pass,nombre);//Verifica si el Usuario existe en la Tabla Usuario
                 if(verifi == true){
-                    Toast.makeText(MainActivity.this, "Logeo completo", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(MainActivity.this, "Logeo Exitoso", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,home.class);
                     startActivity(i);
+
                 }
             }
         }
     };
     View.OnClickListener onregistro = new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
+        public void onClick(View view) {//Manda a llamar a la pantalla Registro
+
             Intent i  = new Intent(MainActivity.this,registro.class);
             startActivity(i);
+
         }
     };
 

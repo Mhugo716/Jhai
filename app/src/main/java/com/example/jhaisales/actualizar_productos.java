@@ -36,6 +36,7 @@ public class actualizar_productos extends AppCompatActivity {
         binding = ActivityActualizarProductosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Relacion con los objetos de la vista
         imgProducto = findViewById(R.id.imgPA);
         nombreProducto = findViewById(R.id.nombrePA);
         marca = findViewById(R.id.marcaA);
@@ -49,6 +50,7 @@ public class actualizar_productos extends AppCompatActivity {
         btnborrar = findViewById(R.id.btnEliminar);
         btnborrar.setOnClickListener(borrar);
 
+        //Determina si la actividad se está creando por primera vez o si se está restaurando después de un cambio de configuración.
         if(savedInstanceState ==null){
 
             Bundle extra = getIntent().getExtras();
@@ -68,11 +70,13 @@ public class actualizar_productos extends AppCompatActivity {
 
         }
 
+        //Utiliza una instancia de la clase DB para obtener los datos de un producto específico de la base de datos.
         db = new DB(this);
         datos = db.mostrarproducto(""+ id);
 
         if (datos != null){
 
+            //muestra la imagen del producto y los valores de varias columnas en la interfaz de usuario.
             byte[] img  = datos.getImagen();
             Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
             imgProducto.setImageBitmap(bitmap);
@@ -91,6 +95,8 @@ public class actualizar_productos extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+
+            //Seleccion de las columnas de la Tabla Producto
             String nombreProducto = binding.nombrePA.getText().toString();
             String marca = binding.marcaA.getText().toString();
             Double precio = Double.valueOf(binding.precioA.getText().toString());
@@ -98,12 +104,13 @@ public class actualizar_productos extends AppCompatActivity {
             String categoria = binding.categoriaA.getText().toString();
             byte[] imagen = imageViewToByte(binding.imgPA);
 
-
+            //Verifica si los campos se encuentran
             if (nombreProducto.equals("")&&  descripcion.equals("")&& precio.equals("")&& marca.equals("")&& categoria.equals("")&& imagen.equals("")){
 
                 Toast.makeText(actualizar_productos.this, "Campos vacios", Toast.LENGTH_SHORT).show();
 
           }else{
+                //Inserta los nuevos datos del producto a la Tabla Productos
                 boolean correcto = db.modificarproducto(id, nombreProducto,imagen,marca,precio,descripcion,categoria);
 
                 if (correcto==true){
@@ -120,6 +127,7 @@ public class actualizar_productos extends AppCompatActivity {
         }
     };
 
+    //Borra el producto de la Tabla Productos
     View.OnClickListener borrar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

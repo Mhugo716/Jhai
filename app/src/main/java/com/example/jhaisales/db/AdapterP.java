@@ -33,6 +33,7 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+        //Visualizacion de los datos con la vista
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.productos,parent,false);
         return new ViewHolder(view);
 
@@ -40,6 +41,8 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,final int position) {
+
+        //Relacion de las columnas de las tablas con el AdapterP
         holder.id.setText(String.valueOf(lista.get(position).getId()));
         holder.columna1.setText(lista.get(position).getColumna1());
         holder.columna2.setText(lista.get(position).getColumna2());
@@ -49,15 +52,6 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.ViewHolder> {
         byte[] imagen = datos.getImagen();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imagen, 0, imagen.length);
         holder.imagen.setImageBitmap(bitmap);
-
-        /*holder.btnVista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context cont = v.getContext();
-                Intent intent = new Intent(cont, vistaProducto.class);
-                cont.startActivity(intent);
-            }
-        });*/
 
     }
 
@@ -74,6 +68,8 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.ViewHolder> {
 
         public ViewHolder(@NonNull View View) {
             super(View);
+
+            //Relacion de las columnas con los componentes de la vista
             id = View.findViewById(R.id.idproducto);
             columna1 = View.findViewById(R.id.product_name);
             columna2 = View.findViewById(R.id.product_description);
@@ -82,7 +78,7 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.ViewHolder> {
             btnVista = View.findViewById(R.id.btnvistaProducto);
             btncompra = View.findViewById(R.id.btnCarrro);
 
-            View.setOnClickListener(new View.OnClickListener() {
+            View.setOnClickListener(new View.OnClickListener() {//Boton para visualizar los datos del producto en la vista Actualizar
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
@@ -92,7 +88,7 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.ViewHolder> {
                 }
             });
 
-            btnVista.setOnClickListener(new View.OnClickListener() {
+            btnVista.setOnClickListener(new View.OnClickListener() {//Boton para visualizar el producto en la vistaProducto
                 @Override
                 public void onClick(android.view.View v) {
                     Context context = v.getContext();
@@ -102,7 +98,7 @@ public class AdapterP extends RecyclerView.Adapter<AdapterP.ViewHolder> {
                 }
             });
 
-            btncompra.setOnClickListener(new View.OnClickListener() {
+            btncompra.setOnClickListener(new View.OnClickListener() {//Manda a llamar a la vista Carrito visualizando todos los productos agregados
                 @Override
                 public void onClick(android.view.View v) {
                     Context context = v.getContext();

@@ -46,6 +46,7 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull AdapterPV.ViewHolder holder, int position) {
 
+        //Relacion de las columnas de las tablas con el AdapterPV
         holder.id.setText(String.valueOf(list.get(position).getId()));
         holder.columna1.setText(list.get(position).getColumna1());
         holder.columna2.setText(list.get(position).getColumna2());
@@ -65,27 +66,6 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
         return list.size();
     }
 
-    /*public void eliminar(){
-        ArrayList<Datos> itemsremoved = new ArrayList<>();
-        Datos  item;
-        for (int i = 0; i< list.size(); i++){
-            item = list.get(i);
-            if(item.getId() == list.size()){
-                itemsremoved.add(item);
-                list.remove(i);
-                break;
-            }
-        }
-        this.notifyDataSetChanged();
-    }*/
-
-    /*public void borrar(){
-        int count = list.size();
-        list.clear();
-        this.notifyItemRangeRemoved(0, count);
-
-    }*/
-
         public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView id,columna1,columna2,columna3,columna4,columna5, cantidad;
         private ImageView imagen;
@@ -93,6 +73,8 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
         private Button btnDatosCliente;
         public ViewHolder(@NonNull View View) {
             super(View);
+
+            //Relacion de las columnas con los componentes de la vista
             id = View.findViewById(R.id.idproduct);
             columna1 = View.findViewById(R.id.productname);
             columna2 = View.findViewById(R.id.productdescription);
@@ -101,9 +83,7 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
             cantidad = View.findViewById(R.id.cantidadproduct);
             btnDatosCliente = View.findViewById(R.id.btnCliente);
 
-
-
-            View.setOnClickListener(new View.OnClickListener() {
+            View.setOnClickListener(new View.OnClickListener() {//Boton para visualizar el producto en la vistaProducto
                 @Override
                 public void onClick(android.view.View v) {
                     Context context = v.getContext();
@@ -112,14 +92,6 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
                     context.startActivity(i);
                 }
             });
-
-//            btnDatosCliente.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(android.view.View v) {
-//
-//                }
-//            });
-
         }
     }
 }

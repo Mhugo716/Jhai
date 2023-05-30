@@ -201,9 +201,12 @@ public class vistaProducto extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm", Locale.getDefault());
         String formattedDate = df.format(c);
 
-        String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' ']", "");
+        String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' '.]", "");
         Log.e("numeropedido", nuevacadena);
 
-        db.insertarPedido(datos.getColumna1(), Integer.parseInt(nuevacadena), datos.getId(), datos.getColumna4());
+        db.insertarPedido(datos.getColumna1(), Integer.parseInt(nuevacadena), datos.getId(),datos.getColumna3(), datos.getColumna4(), datos.getImagen());
+
+
     }
+
 }

@@ -34,13 +34,16 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         db = new DB(this.getContext());
 
         datos = new ArrayList<>();
 
+        //Relacion con el recyclerView de la vista
         recyclerView = root.findViewById(R.id.rcProductos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        //Manda a llamar al Adapter para visualizar los prodcutos en la pantalla con la funcion mostrarProductos
         AdapterP adapter = new AdapterP(db.mostrartodoProductos(),getContext());
         recyclerView.setAdapter(adapter);
 

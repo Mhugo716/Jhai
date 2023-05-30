@@ -36,9 +36,11 @@ public class nav_fuller extends Fragment {
 
         date = new ArrayList<>();
 
+        //Relacion con el recyclerView de la vista
         recyclerView = root.findViewById(R.id.productosFuller);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        //Manda a llamar al Adapter para visualizar los prodcutos en la pantalla con la funcion mostrarProductos
         AdapterP adapter = new AdapterP(db.mostrarFuller(),getContext());
         recyclerView.setAdapter(adapter);
 
