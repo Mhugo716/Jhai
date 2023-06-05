@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.jhaisales.databinding.ActivityRegistroBinding;
 import com.example.jhaisales.db.DB;
 
+import org.json.JSONArray;
+
 public class registro extends AppCompatActivity {
     Button btnRegister;
     EditText nombre, correo, password;
@@ -62,7 +64,10 @@ public class registro extends AppCompatActivity {
     };
 
     public void login(){//Manda a llamar la Pantalla de Inicio de Sesion
+
         Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
+
     }
+
 }

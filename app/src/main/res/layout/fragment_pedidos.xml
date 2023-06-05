@@ -25,11 +25,6 @@
         android:dividerHeight="1dp" />
 
     <!-- Pie de página de la vista -->
-    <Button
-        android:id="@+id/btnPedidos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirmar Pedidos"
-        android:textSize="18dp"/>
+
 
 </LinearLayout>

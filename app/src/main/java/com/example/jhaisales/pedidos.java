@@ -37,7 +37,6 @@ public class pedidos extends Fragment {
     private DB db;
     private ArrayList datos;
     private RecyclerView recyclerView;
-    private Button btnNotificacion;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,8 +51,6 @@ public class pedidos extends Fragment {
         binding = FragmentPedidosBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        btnNotificacion = root.findViewById(R.id.btnPedidos);
-
         db = new DB(this.getContext());
 
         datos = new ArrayList<>();
@@ -63,13 +60,6 @@ public class pedidos extends Fragment {
 
         AdapterPD adapterPD = new AdapterPD(db.mostrarPedidos(), getContext());
         recyclerView.setAdapter(adapterPD);
-
-        btnNotificacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         return root;
     }
