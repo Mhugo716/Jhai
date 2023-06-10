@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jhaisales.R;
 import com.example.jhaisales.actualizar_productos;
 import com.example.jhaisales.carritoCompras;
-import com.example.jhaisales.datos_cliente;
 import com.example.jhaisales.vistaProducto;
 
 import java.util.ArrayList;

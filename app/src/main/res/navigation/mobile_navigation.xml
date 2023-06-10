@@ -61,5 +61,10 @@
         android:name="com.example.jhaisales.datosCliente"
         android:label="fragment_datos_cliente"
         tools:layout="@layout/fragment_datos_cliente" />
+    <fragment
+        android:id="@+id/lista_Clientes"
+        android:name="com.example.jhaisales.Lista_Clientes"
+        android:label="fragment_lista__clientes"
+        tools:layout="@layout/fragment_lista__clientes" />
 
 </navigation>

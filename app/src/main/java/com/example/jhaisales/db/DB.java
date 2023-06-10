@@ -109,6 +109,7 @@ public class DB extends SQLiteOpenHelper {
     public boolean insertCliente(String nombreCliente, String direccion, String telefono, String referencias){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+
         cv.put("nombreCliente", nombreCliente);
         cv.put("direccion", direccion);
         cv.put("telefono", telefono);
@@ -200,6 +201,32 @@ public class DB extends SQLiteOpenHelper {
         return listadatos;
     }
 
+    public ArrayList mostrarDatosCliente(){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ArrayList<Datos> listadate = new ArrayList<>();
+        Datos dato = null;
+        Cursor cursor = null;
+        cursor = database.rawQuery("SELECT * FROM " + TABLE_CLIENTE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                dato = new Datos();
+                dato.setId(cursor.getInt(0));
+                dato.setColumna1(cursor.getString(1));
+                dato.setColumna2(cursor.getString(2));
+                dato.setColumna3(cursor.getString(3));
+                dato.setColumna4(cursor.getString(4));
+
+                listadate.add(dato);
+
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return listadate;
+    }
+
     public ArrayList<Datos> mostrarPedidos() {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -244,6 +271,24 @@ public class DB extends SQLiteOpenHelper {
         }
         cursor.close();
         return datos;
+    }
+
+    public Datos mostrarCliente(String id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Datos data = null;
+        Cursor cursor;
+        cursor = database.rawQuery("SELECT * FROM " + TABLE_CLIENTE + " WHERE idCliente= " + id + " LIMIT 1", null);
+
+        if (cursor.moveToNext()) {
+            data = new Datos();
+            data.setId(cursor.getInt(0));
+            data.setColumna1(cursor.getString(1));
+            data.setColumna2(cursor.getString(2));
+            data.setColumna3(cursor.getString(3));
+            data.setColumna4(cursor.getString(4));
+        }
+        cursor.close();
+        return data;
     }
 
     public boolean modificarproducto(int id, String nombreProducto, byte[] imagen, String marca, Double precio, String descripcion, String categoria) {

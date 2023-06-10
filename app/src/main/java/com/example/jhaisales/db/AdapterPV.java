@@ -70,7 +70,6 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
         private TextView id,columna1,columna2,columna3,columna4,columna5, cantidad;
         private ImageView imagen;
 
-        private Button btnDatosCliente;
         public ViewHolder(@NonNull View View) {
             super(View);
 
@@ -81,7 +80,6 @@ public class AdapterPV extends RecyclerView.Adapter<AdapterPV.ViewHolder> {
             columna3 = View.findViewById(R.id.price);
             imagen = View.findViewById(R.id.product_imag);
             cantidad = View.findViewById(R.id.cantidadproduct);
-            btnDatosCliente = View.findViewById(R.id.btnCliente);
 
             View.setOnClickListener(new View.OnClickListener() {//Boton para visualizar el producto en la vistaProducto
                 @Override

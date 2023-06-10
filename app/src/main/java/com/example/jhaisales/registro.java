@@ -73,8 +73,4 @@ public class registro extends AppCompatActivity {
 
     }
 
-    public void sincronizar(){
-
-    }
-
 }

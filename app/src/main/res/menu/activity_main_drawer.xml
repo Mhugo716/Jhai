@@ -29,6 +29,11 @@
             android:icon="@drawable/clientes"
             android:title="@string/datosC" />
 
+        <item
+            android:id="@+id/lista_Clientes"
+            android:icon="@drawable/listacliente"
+            android:title="@string/clientes" />
+
 
 
     </group>
