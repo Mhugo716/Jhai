@@ -11,8 +11,11 @@ import android.widget.Toast;
 
 import com.example.jhaisales.databinding.ActivityRegistroBinding;
 import com.example.jhaisales.db.DB;
+import com.example.jhaisales.db.Datos;
 
 import org.json.JSONArray;
+
+import java.util.List;
 
 public class registro extends AppCompatActivity {
     Button btnRegister;
@@ -67,6 +70,10 @@ public class registro extends AppCompatActivity {
 
         Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
+
+    }
+
+    public void sincronizar(){
 
     }
 

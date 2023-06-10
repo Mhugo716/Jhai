@@ -13,12 +13,12 @@
     <string name="menu_gallery">Registros</string>
     <string name="menu_slideshow">Perfil</string>
     <string name="pedido">Pedidos</string>
+    <string name="datosC">Registro De Clientes</string>
 
     <style name="roundedImageViewRounded">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
-    <string name="URL_OBETENER">SyncSQLiteMySQL</string>
 
 </resources>

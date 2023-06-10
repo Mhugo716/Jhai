@@ -56,5 +56,10 @@
         android:id="@+id/pedidos"
         android:name="com.example.jhaisales.pedidos"
         android:label="pedidos" />
+    <fragment
+        android:id="@+id/datosCliente"
+        android:name="com.example.jhaisales.datosCliente"
+        android:label="fragment_datos_cliente"
+        tools:layout="@layout/fragment_datos_cliente" />
 
 </navigation>

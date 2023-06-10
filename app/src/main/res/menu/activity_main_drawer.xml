@@ -8,10 +8,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
             android:title="@string/menu_home" />
+
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/addproduct"
             android:title="Añadir productos" />
+
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/perfil"
@@ -21,6 +23,13 @@
             android:id="@+id/pedidos"
             android:icon="@drawable/pedido"
             android:title="@string/pedido" />
+
+        <item
+            android:id="@+id/datosCliente"
+            android:icon="@drawable/clientes"
+            android:title="@string/datosC" />
+
+
 
     </group>
 

@@ -197,6 +197,7 @@ public class vistaProducto extends AppCompatActivity {
     }
 
     private void insertPedido(){
+
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm", Locale.getDefault());
         String formattedDate = df.format(c);
@@ -204,8 +205,12 @@ public class vistaProducto extends AppCompatActivity {
         String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' '.]", "");
         Log.e("numeropedido", nuevacadena);
 
-        db.insertarPedido(datos.getColumna1(), Integer.parseInt(nuevacadena), datos.getId(),datos.getColumna3(), datos.getColumna4(), datos.getImagen());
-
+        db.insertarPedido(
+                datos.getColumna1(),
+                Integer.parseInt(nuevacadena),
+                datos.getId(),datos.getColumna3(),
+                datos.getColumna4(),
+                datos.getImagen());
 
     }
 
