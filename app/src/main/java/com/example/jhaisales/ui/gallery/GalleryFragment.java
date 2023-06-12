@@ -25,7 +25,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+//import androidx.lifecycle.ViewModelProvider;
 
 import com.example.jhaisales.R;
 import com.example.jhaisales.actualizar_productos;
@@ -48,8 +48,8 @@ public class GalleryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+//        GalleryViewModel galleryViewModel =
+//                new ViewModelProvider(this).get(GalleryViewModel.class);
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

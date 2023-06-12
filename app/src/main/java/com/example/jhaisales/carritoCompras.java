@@ -165,10 +165,8 @@ public class carritoCompras extends AppCompatActivity {
         String formattedDate = df.format(c);
 
         String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' '.]", "");
-        Log.e("numeropedido", nuevacadena);
 
         for (Datos producto: productos) {
-
             db.insertarPedido(producto.getColumna1(), Integer.parseInt(nuevacadena), producto.getId(), producto.getColumna3(), datos.getColumna4(), datos.getImagen());
 
         }

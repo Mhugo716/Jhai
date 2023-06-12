@@ -2,7 +2,9 @@ package com.example.jhaisales;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,8 +57,18 @@ public class MainActivity extends AppCompatActivity {
 
             }else{
 
-                boolean verifi = db.checkpass(pass,nombre);//Verifica si el Usuario existe en la Tabla Usuario
-                if(verifi == true){
+                int verifi = db.checkpass(pass,nombre);//Verifica si el Usuario existe en la Tabla Usuario
+                if(verifi != -1){
+
+                    SharedPreferences preferences = getSharedPreferences("jhaisales", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    if (preferences.getInt("id_usuario", -1) != -1){
+                        editor.remove("id_usuario").commit();
+                        editor.apply();
+                    }
+
+                    editor.putInt("id_usuario", verifi).commit();
+                    editor.apply();
 
                     Toast.makeText(MainActivity.this, "Logeo Exitoso", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,home.class);

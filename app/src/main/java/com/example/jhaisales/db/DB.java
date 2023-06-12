@@ -141,14 +141,15 @@ public class DB extends SQLiteOpenHelper {
         return (result != -1);
     }
 
-    public boolean checkpass(String password, String nombre) {
+    public int checkpass(String password, String nombre) {
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery("Select * from usuario Where nombre=? and password = ?", new String[]{nombre, password});
 
         if (cursor.getCount() > 0) {
-            return true;
+            cursor.moveToFirst();
+            return cursor.getInt(0);
         } else {
-            return false;
+            return -1;
         }
     }
 
@@ -228,21 +229,21 @@ public class DB extends SQLiteOpenHelper {
         return listadate;
     }
 
-    public ArrayList mostrarDatosUsuario(){
+    public ArrayList<Datos> mostrarDatosUsuario(int id){
         SQLiteDatabase database = this.getWritableDatabase();
 
         ArrayList<Datos> listadate = new ArrayList<>();
         Datos dato = null;
         Cursor cursor = null;
-        cursor = database.rawQuery("SELECT * FROM " + TABLE_USUARIOS, null);
+        cursor = database.rawQuery("SELECT * FROM " + TABLE_USUARIOS + " WHERE id= "+ id , null);
 
         if (cursor.moveToFirst()){
             do{
                 dato = new Datos();
                 dato.setId(cursor.getInt(0));
                 dato.setColumna1(cursor.getString(1));
-                dato.setColumna1(cursor.getString(2));
-                dato.setColumna1(cursor.getString(3));
+                dato.setColumna2(cursor.getString(2));
+                dato.setColumna3(cursor.getString(3));
 
                 listadate.add(dato);
             }while (cursor.moveToNext());
@@ -554,4 +555,18 @@ public class DB extends SQLiteOpenHelper {
 
     }
 
+    public boolean modificarUsuario(int id, String nombre, String correo, String password) {
+        SQLiteDatabase dataB = getWritableDatabase();
+        boolean listo;
+        try{
+            dataB.execSQL(" UPDATE " + TABLE_USUARIOS + " SET nombre ='" + nombre + "', correo = '" + correo + "',password = '" + password +"' WHERE id = '" + id + "'");
+            listo = true;
+        }catch (Exception ex){
+            ex.toString();
+            listo = false;
+        }finally {
+            dataB.close();
+        }
+        return listo;
+    }
 }

@@ -7,23 +7,23 @@
     android:layout_height="match_parent"
     >
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar2"-->
-<!--        android:layout_width="409dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/cat"-->
-<!--        android:theme="?attr/actionBarTheme"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/toolbar2"-->
+    <!--        android:layout_width="409dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/cat"-->
+    <!--        android:theme="?attr/actionBarTheme"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent">-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/Atras"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:src="@drawable/atras" />-->
+    <!--        <ImageView-->
+    <!--            android:id="@+id/Atras"-->
+    <!--            android:layout_width="30dp"-->
+    <!--            android:layout_height="30dp"-->
+    <!--            android:src="@drawable/atras" />-->
 
-<!--    </androidx.appcompat.widget.Toolbar>-->
+    <!--    </androidx.appcompat.widget.Toolbar>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,22 +36,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:text="ID"
-            android:textAlignment="center"
-            android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/idPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -61,10 +46,10 @@
             android:textAlignment="center"
             android:textSize="20dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/nombrePerfil"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:textAlignment="center"
             android:textSize="16sp" />
@@ -77,10 +62,10 @@
             android:textAlignment="center"
             android:textSize="20dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/correoPerfil"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:textAlignment="center"
@@ -102,6 +87,22 @@
         <!--            android:layout_height="120dp"-->
         <!--            android:layout_marginTop="20dp"-->
         <!--            />-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Password"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/passPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -110,10 +111,10 @@
             android:src="@drawable/datos_cliente" />
 
         <Button
-            android:id="@+id/btnActualizarPerfi"
+            android:id="@+id/btnActualizarPerfil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Actualizar datos"
+            android:text="Actualizar"
             android:layout_marginTop="20dp"
             android:layout_gravity="center" />
     </LinearLayout>
