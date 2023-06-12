@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".datosCliente">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="@color/cat"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    <ImageView
+        android:id="@+id/Atras"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/atras"
+        />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favor de llenar los campos"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+
+        <EditText
+            android:id="@+id/nombreCA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/styledit"
+            android:ems="10"
+            android:hint="Nombre Del Cliente"
+            android:inputType="text"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/direccionCA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/styledit"
+            android:ems="10"
+            android:hint="Dirección"
+            android:inputType="text"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/telefonoCA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/styledit"
+            android:ems="10"
+            android:hint="Telefono"
+            android:inputType="numberDecimal"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/referenciasCA"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/styleditdos"
+            android:ems="10"
+            android:hint="Referencias"
+            android:inputType="text"
+            android:textAlignment="center" />
+
+
+        <Button
+            android:id="@+id/btnDatosCA"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/gris"
+            android:text="Guardar Datos" />
+
+        <Button
+            android:id="@+id/btnEliminarCliente"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:text="Eliminar"
+            android:backgroundTint="@color/gris"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

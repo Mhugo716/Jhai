@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jhaisales.R;
+import com.example.jhaisales.actualizar_datos_cliente;
 import com.example.jhaisales.vistaProducto;
 import com.example.jhaisales.vista_datos_cliente;
 
@@ -49,7 +50,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView id,columna1,columna2,columna3,columna4;
+        private TextView id,columna1,columna2,columna3,columna4, actulizarD;
         public ViewHolder(View view) {
             super(view);
 
@@ -58,12 +59,23 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.ViewHolder
             columna2 = view.findViewById(R.id.direccioncliente);
             columna3 = view.findViewById(R.id.telefonocliente);
             columna4 = view.findViewById(R.id.referenciasCliente);
+            actulizarD = view.findViewById(R.id.actualizarDatos);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
                     Intent i = new Intent(context, vista_datos_cliente.class);
+                    i.putExtra("idCliente",lista.get(getAdapterPosition()).getId());
+                    context.startActivity(i);
+                }
+            });
+
+            actulizarD.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent i = new Intent(context, actualizar_datos_cliente.class);
                     i.putExtra("idCliente",lista.get(getAdapterPosition()).getId());
                     context.startActivity(i);
                 }

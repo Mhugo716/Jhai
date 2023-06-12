@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class vista_datos_cliente extends AppCompatActivity {
     TextView nombreCl, direccionCl, telefonoCl,referenciasCl;
 
     ImageView atrasCL;
+
+    Button btnDatos;
 
     private ActivityVistaDatosClienteBinding binding;
     DB db;
@@ -64,6 +67,8 @@ public class vista_datos_cliente extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
     }
 

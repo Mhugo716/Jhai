@@ -62,7 +62,9 @@ public class HomeFragment extends Fragment {
         //Manda a llamar al Adapter para visualizar los prodcutos en la pantalla con la funcion mostrarProductos
         AdapterP adapter = new AdapterP(db.mostrartodoProductos(),getContext());
         recyclerView.setAdapter(adapter);
+
         binding.btnSincronizar.setOnClickListener(sincro);
+
         return root;
     }
     private void sincronizacion(){

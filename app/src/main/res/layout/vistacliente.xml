@@ -58,16 +58,22 @@
         android:layout_height="90dp"
         android:orientation="vertical">
 
-
-
         <TextView
             android:id="@+id/referenciasCliente"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:text="Cantidad"
             android:textStyle="bold"
             android:textSize="15dp"
             />
+
+        <TextView
+            android:id="@+id/actualizarDatos"
+            android:layout_width="90dp"
+            android:layout_height="20dp"
+            android:text="Actualizar"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
 
 
 

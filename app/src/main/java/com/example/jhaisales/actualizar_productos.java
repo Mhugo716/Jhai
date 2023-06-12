@@ -132,7 +132,7 @@ public class actualizar_productos extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            if(db.borrarProducto(id)                                                                                                                                       ){
+            if(db.borrarProducto(id)){
                 Toast.makeText(actualizar_productos.this, "PRODUCTO BORRADO", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(actualizar_productos.this,home.class);
                 startActivity(i);

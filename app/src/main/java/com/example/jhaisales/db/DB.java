@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DB extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 17;
     private static final String DATABASE_NOMBRE = "jhai.db";
     private static final String TABLE_USUARIOS = "usuario";
 
@@ -96,6 +96,7 @@ public class DB extends SQLiteOpenHelper {
         contentValues.put("nombre", nombre);
         contentValues.put("correo", correo);
         contentValues.put("password", password);
+
 
         long resultados = sqLiteDatabase.insert(TABLE_USUARIOS, null, contentValues);
 
@@ -227,6 +228,30 @@ public class DB extends SQLiteOpenHelper {
         return listadate;
     }
 
+    public ArrayList mostrarDatosUsuario(){
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ArrayList<Datos> listadate = new ArrayList<>();
+        Datos dato = null;
+        Cursor cursor = null;
+        cursor = database.rawQuery("SELECT * FROM " + TABLE_USUARIOS, null);
+
+        if (cursor.moveToFirst()){
+            do{
+                dato = new Datos();
+                dato.setId(cursor.getInt(0));
+                dato.setColumna1(cursor.getString(1));
+                dato.setColumna1(cursor.getString(2));
+                dato.setColumna1(cursor.getString(3));
+
+                listadate.add(dato);
+            }while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        return listadate;
+    }
+
     public ArrayList<Datos> mostrarPedidos() {
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -291,6 +316,24 @@ public class DB extends SQLiteOpenHelper {
         return data;
     }
 
+    public Datos mostrarUsuario(String id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Datos date = null;
+        Cursor cursor;
+        cursor = database.rawQuery("SELECT * FROM " + TABLE_USUARIOS + " WHERE id= " + id + " LIMIT 1", null);
+
+        if (cursor.moveToNext()){
+            date = new Datos();
+            date.setId(cursor.getInt(0));
+            date.setColumna1(cursor.getString(1));
+            date.setColumna2(cursor.getString(2));
+            date.setColumna3(cursor.getString(3));
+        }
+        cursor.close();
+        return date;
+
+    }
+
     public boolean modificarproducto(int id, String nombreProducto, byte[] imagen, String marca, Double precio, String descripcion, String categoria) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues img = new ContentValues();
@@ -309,6 +352,21 @@ public class DB extends SQLiteOpenHelper {
         return correcto;
     }
 
+    public boolean modificarDatosCliente(int id, String nombreCliente, String direccion, String telefono, String referencias){
+        SQLiteDatabase dataB = getWritableDatabase();
+        boolean listo;
+        try{
+            dataB.execSQL(" UPDATE " + TABLE_CLIENTE + " SET nombreCliente ='" + nombreCliente + "', direccion = '" + direccion + "',telefono = '" + telefono + "',referencias = '" + referencias + " 'WHERE idCliente = '" + id + "'");
+            listo = true;
+        }catch (Exception ex){
+            ex.toString();
+            listo = false;
+        }finally {
+            dataB.close();
+        }
+        return listo;
+    }
+
     public boolean borrarProducto(int id) {
         boolean correcto = false;
         SQLiteDatabase db = getWritableDatabase();
@@ -322,6 +380,21 @@ public class DB extends SQLiteOpenHelper {
             db.close();
         }
         return correcto;
+    }
+
+    public boolean borrarCliente(int id){
+        boolean correct = false;
+        SQLiteDatabase db = getWritableDatabase();
+        try{
+            db.execSQL(" DELETE FROM " + TABLE_CLIENTE +  " WHERE idCliente= '" + id + "'");
+            correct = true;
+        }catch (Exception ex){
+            ex.toString();
+            correct = false;
+        }finally {
+            db.close();
+        }
+        return correct;
     }
 
 
