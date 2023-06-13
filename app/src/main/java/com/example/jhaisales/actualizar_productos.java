@@ -2,8 +2,10 @@ package com.example.jhaisales;
 
 import static com.example.jhaisales.ui.gallery.GalleryFragment.imageViewToByte;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -132,12 +134,33 @@ public class actualizar_productos extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            if(db.borrarProducto(id)){
-                Toast.makeText(actualizar_productos.this, "PRODUCTO BORRADO", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(actualizar_productos.this,home.class);
-                startActivity(i);
+            AlertDialog.Builder builder = new AlertDialog.Builder(actualizar_productos.this);
+            builder.setTitle("Advertencia");
+            builder.setMessage("¿Estás seguro de que deseas borrar?");
+            builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-            }
+                    if(db.borrarProducto(id)){
+
+                          Toast.makeText(actualizar_productos.this, "PRODUCTO BORRADO", Toast.LENGTH_SHORT).show();
+                          Intent i = new Intent(actualizar_productos.this,home.class);
+                        startActivity(i);
+
+                         }
+                }
+            });
+            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Acciones a realizar al hacer clic en el botón "Cancelar" del diálogo
+                    // Aquí puedes implementar cualquier acción adicional o simplemente cerrar el diálogo
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
         }
     };
 }

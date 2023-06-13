@@ -24,48 +24,74 @@
             />
 
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/perfil"
+            />
+
         <EditText
             android:id="@+id/nombreC"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginLeft="70dp"
             android:background="@drawable/styledit"
             android:ems="10"
             android:hint="Nombre Del Cliente"
             android:inputType="text"
             android:textAlignment="center" />
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/direccion"
+            />
+
         <EditText
             android:id="@+id/direccionC"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="70dp"
             android:background="@drawable/styledit"
             android:ems="10"
             android:hint="Dirección"
             android:inputType="text"
             android:textAlignment="center" />
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/telephone"
+            />
         <EditText
             android:id="@+id/telefonoC"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="70dp"
             android:background="@drawable/styledit"
             android:ems="10"
             android:hint="Telefono"
             android:inputType="numberDecimal"
             android:textAlignment="center" />
 
+       <ImageView
+           android:layout_width="20dp"
+           android:layout_height="20dp"
+           android:layout_marginLeft="70dp"
+           android:layout_marginTop="20dp"
+           android:src="@drawable/referencias"
+           />
         <EditText
             android:id="@+id/referenciasC"
             android:layout_width="250dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="70dp"
             android:background="@drawable/styleditdos"
             android:ems="10"
             android:hint="Referencias"
@@ -77,7 +103,7 @@
             android:id="@+id/btnDatosC"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/gris"
             android:onClick="registroProducto"

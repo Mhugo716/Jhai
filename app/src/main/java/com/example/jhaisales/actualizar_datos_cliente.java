@@ -1,7 +1,9 @@
 package com.example.jhaisales;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -101,14 +103,34 @@ public class actualizar_datos_cliente extends AppCompatActivity {
         btnEliminarCL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(db.borrarCliente(id)){
 
-                    Toast.makeText(actualizar_datos_cliente.this, "CLIENTE BORRADO", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(actualizar_datos_cliente.this);
+                builder.setTitle("Título del mensaje");
+                builder.setMessage("¿Estás seguro de que deseas borrar?");
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Acciones a realizar al hacer clic en el botón "Aceptar" del diálogo
+                        if(db.borrarCliente(id)) {
 
-                    Intent i = new Intent(actualizar_datos_cliente.this,home.class);
-                    startActivity(i);
+                            Toast.makeText(actualizar_datos_cliente.this, "CLIENTE BORRADO", Toast.LENGTH_SHORT).show();
 
-                }
+                            Intent i = new Intent(actualizar_datos_cliente.this, home.class);
+                            startActivity(i);
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Acciones a realizar al hacer clic en el botón "Cancelar" del diálogo
+
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 
