@@ -73,6 +73,7 @@ public class Lista_Clientes extends Fragment {
         for (int i =0; i<date.size();i++){
             JSONObject jsonObject = new JSONObject();
             try{
+
                 jsonObject.put("idCliente",date.get(i).getId());
                 jsonObject.put("nombreCliente",date.get(i).getColumna1());
                 jsonObject.put("direccion",date.get(i).getColumna2());

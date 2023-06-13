@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DB extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 18;
     private static final String DATABASE_NOMBRE = "jhai.db";
     private static final String TABLE_USUARIOS = "usuario";
 
@@ -52,7 +52,7 @@ public class DB extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_PARTIDAS + "(" +
                 "idPartida INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombreProducto TEXT NOT NULL, " +
-                "numeroPedido INTEGER NOT NULL, " +
+                "numeroPedido TEXT NOT NULL," +
                 "idProducto INTEGER NOT NULL," +
                 "categoria TEXT NOT NULL," +
                 "precio DOUBLE NOT NULL," +

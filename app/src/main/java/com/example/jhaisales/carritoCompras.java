@@ -18,9 +18,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.jhaisales.db.AdapterPV;
 import com.example.jhaisales.db.DB;
 import com.example.jhaisales.db.Datos;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -160,6 +170,7 @@ public class carritoCompras extends AppCompatActivity {
     }
 
     private void insertPedido(){
+
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy HH:mm", Locale.getDefault());
         String formattedDate = df.format(c);
@@ -171,4 +182,6 @@ public class carritoCompras extends AppCompatActivity {
 
         }
     }
+
+
 }
