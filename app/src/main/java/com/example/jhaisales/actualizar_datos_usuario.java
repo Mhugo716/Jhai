@@ -47,14 +47,16 @@ public class actualizar_datos_usuario extends AppCompatActivity {
         String correo = binding.correoPerfil.getEditableText().toString();
         String password = binding.passPerfil.getEditableText().toString();
 
-        if(!nombre.isEmpty() && !correo.isEmpty() && !password.isEmpty()){
+        if(!correo.isEmpty() && !password.isEmpty()){
 
             if (db.modificarUsuario(id,nombre,correo,password)){
                 finish();
             }
 
         }else{
+
             Toast.makeText(this, "Algun dato sin llenar", Toast.LENGTH_SHORT).show();
+
         }
     };
 }

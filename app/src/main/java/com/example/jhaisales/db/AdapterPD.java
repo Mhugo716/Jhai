@@ -46,8 +46,9 @@ public class AdapterPD extends RecyclerView.Adapter<AdapterPD.ViewHolder> {
         holder.columna1.setText(lista.get(position).getColumna1());
         holder.columna2.setText(lista.get(position).getColumna2());
         holder.columna3.setText(lista.get(position).getColumna3());
-      //  Log.e("cantidadRV", String.valueOf(lista.get(position).getCantidad()));
-       // holder.cantidad.setText("" + lista.get(position).getCantidad());
+        holder.columna4.setText(lista.get(position).getColumna4());
+        holder.columna5.setText(lista.get(position).getColumna5());
+
 
         Datos datos = lista.get(position);
         byte[] imagen = datos.getImagen();
@@ -75,8 +76,10 @@ public class AdapterPD extends RecyclerView.Adapter<AdapterPD.ViewHolder> {
             //Relacion de las columnas con los componentes de la vista
             id = View.findViewById(R.id.idproduct);
             columna1 = View.findViewById(R.id.productname);
-            columna2 = View.findViewById(R.id.productdescription);
-            columna3 = View.findViewById(R.id.price);
+            columna2 = View.findViewById(R.id.numeroPedido);
+            columna3 = View.findViewById(R.id.idP);
+            columna4 = View.findViewById(R.id.productdescription);
+            columna5 = View.findViewById(R.id.price);
             imagen = View.findViewById(R.id.product_imag);
             cantidad = View.findViewById(R.id.cantidadproduct);
 

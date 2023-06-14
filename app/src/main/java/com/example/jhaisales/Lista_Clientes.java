@@ -99,7 +99,7 @@ public class Lista_Clientes extends Fragment {
 
     private void registarCliente(final String jsonStr){
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        String url = "http://192.168.1.68/android/insertarCli.php";
+        String url = "https://catalogos.estudiasistemas.com/insertarCli.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

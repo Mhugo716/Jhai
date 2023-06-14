@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putInt("id_usuario", verifi).commit();
                     editor.apply();
 
-                    Toast.makeText(MainActivity.this, "Logeo Exitoso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Ingreso Exitoso", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,home.class);
                     startActivity(i);
 

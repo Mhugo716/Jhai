@@ -49,28 +49,37 @@ public class registro extends AppCompatActivity {
             String correo = binding.etCorreo.getText().toString();
             String pass = binding.etPassword.getText().toString();
 
-            if(nombre.equals("") && correo.equals("") && pass.equals("")){//Verifica si los campos son vacios
+            if (nombre.equals("") && correo.equals("") && pass.equals("")) {//Verifica si los campos son vacios
 
                 Toast.makeText(registro.this, "Campos vacios", Toast.LENGTH_SHORT).show();
 
-            }else {
+            } else {
 
-                boolean correcto = db.insertUsuario(nombre,correo,pass);//Inserta los datos a la Tabla Usuarios
-                if(correcto == true){
+                boolean usuarioExistente = db.usuarioExiste(nombre);
+                if (usuarioExistente) {
+                    Toast.makeText(registro.this, "El usuario ya existe", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(registro.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
-                    login();
+                } else {
+
+                    boolean correcto = db.insertUsuario(nombre, correo, pass);//Inserta los datos a la Tabla Usuarios
+                    if (correcto == true) {
+
+                        Toast.makeText(registro.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
+                        login();
+
+                    }
 
                 }
             }
         }
+
     };
 
-    public void login(){//Manda a llamar la Pantalla de Inicio de Sesion
+        public void login() {//Manda a llamar la Pantalla de Inicio de Sesion
 
-        Intent i = new Intent(this,MainActivity.class);
-        startActivity(i);
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+
+        }
 
     }
-
-}

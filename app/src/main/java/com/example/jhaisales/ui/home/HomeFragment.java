@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment {
     }
     private void registarProducto(final String jsonStr){
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        String url = "http://192.168.1.68/android/insertarP.php";
+        String url = "https://catalogos.estudiasistemas.com/insertarP.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

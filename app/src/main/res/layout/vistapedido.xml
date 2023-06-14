@@ -56,6 +56,42 @@
             />
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="120dp"
+        android:layout_height="90dp"
+        android:orientation="vertical">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id Producto"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:id="@+id/idP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Numero de pedido"/>
+
+        <TextView
+            android:id="@+id/numeroPedido"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            />
 
     </LinearLayout>
+
 </LinearLayout>

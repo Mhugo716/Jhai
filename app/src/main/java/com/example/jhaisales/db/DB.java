@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DB extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 18;
+    private static final int DATABASE_VERSION = 20;
     private static final String DATABASE_NOMBRE = "jhai.db";
     private static final String TABLE_USUARIOS = "usuario";
 
@@ -153,6 +153,18 @@ public class DB extends SQLiteOpenHelper {
         }
     }
 
+    public boolean usuarioExiste(String nombre){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("Select * from usuario Where nombre=?", new String[]{nombre});
+
+        boolean existe = (cursor.getCount() > 0);
+
+        cursor.close();
+        database.close();
+
+        return existe;
+    }
+
     public boolean insertarProducto(String nombre, String marca, String precio, String descripcion, String categoria, byte[] imagen) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -204,6 +216,7 @@ public class DB extends SQLiteOpenHelper {
     }
 
     public ArrayList mostrarDatosCliente(){
+
         SQLiteDatabase database = this.getWritableDatabase();
 
         ArrayList<Datos> listadate = new ArrayList<>();
@@ -225,8 +238,10 @@ public class DB extends SQLiteOpenHelper {
 
             }while (cursor.moveToNext());
         }
+
         cursor.close();
         return listadate;
+
     }
 
     public ArrayList<Datos> mostrarDatosUsuario(int id){
@@ -265,11 +280,11 @@ public class DB extends SQLiteOpenHelper {
                 datos = new Datos();
                 datos.setId(cursor.getInt(0));
                 datos.setColumna1(cursor.getString(1));
-                datos.setColumna2(cursor.getString(5));
-                datos.setColumna3(cursor.getString(4));
+                datos.setColumna2(cursor.getString(2));
+                datos.setColumna3(cursor.getString(3));
+                datos.setColumna4(cursor.getString(4));
+                datos.setColumna5(cursor.getString(5));
                 datos.setImagen(cursor.getBlob(6));
-  //              datos.setColumna4(cursor.getString(5));
-  //              datos.setColumna5(cursor.getString(6));
 
                 listadatos.add(datos);
             } while (cursor.moveToNext());

@@ -1,6 +1,6 @@
 package com.example.jhaisales;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
+
 
 
 import android.os.Bundle;
@@ -75,8 +75,10 @@ public class pedidos extends Fragment {
 
                 jsonObject.put("idPartida",datos.get(i).getId());
                 jsonObject.put("nombreProducto",datos.get(i).getColumna1());
-                jsonObject.put("precio",datos.get(i).getColumna2());
-                jsonObject.put("categoria",datos.get(i).getColumna3());
+                jsonObject.put("numeroPedido",datos.get(i).getColumna2());
+                jsonObject.put("idProducto",datos.get(i).getColumna3());
+                jsonObject.put("categoria",datos.get(i).getColumna4());
+                jsonObject.put("precio",datos.get(i).getColumna5());
                 jsonObject.put("imgProducto",datos.get(i).getImagen());
 
             }catch(Exception e){
@@ -96,8 +98,9 @@ public class pedidos extends Fragment {
     }
 
     private void registarCliente(final String jsonStr){
+
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        String url = "http://192.168.1.68/android/insertarPD.php";
+        String url = "https://catalogos.estudiasistemas.com/insertarPD.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -126,4 +129,5 @@ public class pedidos extends Fragment {
     private View.OnClickListener sincro = v -> {
         sincronizacion();
     };
+
 }

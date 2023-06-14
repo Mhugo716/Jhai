@@ -178,7 +178,12 @@ public class carritoCompras extends AppCompatActivity {
         String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' '.]", "");
 
         for (Datos producto: productos) {
-            db.insertarPedido(producto.getColumna1(), Integer.parseInt(nuevacadena), producto.getId(), producto.getColumna3(), datos.getColumna4(), datos.getImagen());
+            db.insertarPedido(producto.getColumna1(),
+                    Integer.parseInt(nuevacadena),
+                    producto.getId(),
+                    producto.getColumna5(),
+                    datos.getColumna3(),
+                    datos.getImagen());
 
         }
     }

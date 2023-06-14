@@ -208,8 +208,9 @@ public class vistaProducto extends AppCompatActivity {
         db.insertarPedido(
                 datos.getColumna1(),
                 Integer.parseInt(nuevacadena),
-                datos.getId(),datos.getColumna3(),
-                datos.getColumna4(),
+                datos.getId(),
+                datos.getColumna5(),
+                datos.getColumna3(),
                 datos.getImagen());
 
     }
