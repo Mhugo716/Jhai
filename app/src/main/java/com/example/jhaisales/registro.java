@@ -21,7 +21,7 @@ public class registro extends AppCompatActivity {
     Button btnRegister;
     EditText nombre, correo, password;
     DB db;
-    ActivityRegistroBinding binding;
+    private ActivityRegistroBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

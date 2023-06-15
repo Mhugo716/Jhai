@@ -30,10 +30,12 @@ public class actualizar_datos_usuario extends AppCompatActivity {
     }
 
     private void getPerfil(){
+
         id = getSharedPreferences("jhaisales", Context.MODE_PRIVATE).getInt("id_usuario", -1);
         if (id == -1){
             Toast.makeText(this, "Error al buscar el usuario", Toast.LENGTH_SHORT).show();
             finish();
+
         }
 
         Datos datos = db.mostrarDatosUsuario(id).get(0);
@@ -43,13 +45,13 @@ public class actualizar_datos_usuario extends AppCompatActivity {
     }
 
     private View.OnClickListener clickActualizar = view ->{
-        String nombre = binding.nombrePerfil.getEditableText().toString();
+        //String nombre = binding.nombrePerfil.getEditableText().toString();
         String correo = binding.correoPerfil.getEditableText().toString();
         String password = binding.passPerfil.getEditableText().toString();
 
         if(!correo.isEmpty() && !password.isEmpty()){
 
-            if (db.modificarUsuario(id,nombre,correo,password)){
+            if (db.modificarUsuario(id,correo,password)){
                 finish();
             }
 

@@ -35,6 +35,16 @@
                 android:backgroundTint="@color/gris"
                 android:text="Subir Imagen" />
 
+            <Button
+                android:id="@+id/btnFoto"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/gris"
+                android:text="Tomar Foto" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -57,17 +67,16 @@
             android:inputType="textPersonName"
             android:textAlignment="center" />
 
-        <EditText
+        <Spinner
             android:id="@+id/marca"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/styledit"
-            android:ems="10"
-            android:hint="marca"
-            android:inputType="text"
-            android:textAlignment="center" />
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/style_snniper"
+            android:popupBackground="@drawable/fondo_snniper"
+            />
+
 
         <EditText
             android:id="@+id/precio"

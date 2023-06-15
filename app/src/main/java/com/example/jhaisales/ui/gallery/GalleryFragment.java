@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -42,9 +48,13 @@ public class GalleryFragment extends Fragment {
     ImageView imgProducto;
     int REQUEST_CODE_GALLERY =999;
     EditText nombreProducto,marca,precio,descripcion,categoria;
-    Button btnproducto,btnimagen;
+    Button btnproducto,btnimagen, btnFotoP;
     private FragmentGalleryBinding binding;
     DB db;
+
+    Spinner spinnerCategoria;
+
+    ArrayAdapter<CharSequence> spinnerAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +68,7 @@ public class GalleryFragment extends Fragment {
         db = new DB(this.getContext());
         imgProducto = root.findViewById(R.id.imgP);
         nombreProducto = root.findViewById(R.id.nombreP);
-        marca = root.findViewById(R.id.marca);
+        //marca = root.findViewById(R.id.marca);
         precio = root.findViewById(R.id.precio);
         descripcion = root.findViewById(R.id.descripcion);
         categoria = root.findViewById(R.id.categoria);
@@ -66,36 +76,55 @@ public class GalleryFragment extends Fragment {
         btnimagen = root.findViewById(R.id.btnimagen);
         btnimagen.setOnClickListener(onimagen);
         btnproducto.setOnClickListener(onguardar);
+        btnFotoP = root.findViewById(R.id.btnFoto);
+        btnFotoP.setOnClickListener(camara);
+
+
+        spinnerCategoria = root.findViewById(R.id.marca);
+        spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.opciones_menu, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategoria.setAdapter(spinnerAdapter);
+
+
 
 
         return root;
     }
+
+
     View.OnClickListener onguardar = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
             //Seleccion de las columnas de la Tabla Prodcustos
-            String nombre = binding.nombreP.getText().toString();
-            String marca = binding.marca.getText().toString();
+            String nombre = binding.nombreP.getText().toString().trim();
+            String marca = binding.marca.getSelectedItem().toString();
             String precio = binding.precio.getText().toString();
             String descripcion = binding.descripcion.getText().toString();
             String categoria = binding.categoria.getText().toString();
             byte[] imagen = imageViewToByte(binding.imgP);
 
             //Verifica si los campos estan vacios
-            if (nombre.isEmpty() || marca.isEmpty() || precio.isEmpty() || descripcion.isEmpty() || categoria.isEmpty() || imagen == null) {
+            if (nombre.isEmpty() || marca.isEmpty() || precio.isEmpty() ||  descripcion.isEmpty() || categoria.isEmpty() || imagen == null) {
 
                 Toast.makeText(getActivity(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
 
             }else{
 
                 //Insersta los datos a la tabla de Productos
-                boolean insert = db.insertarProducto(nombre, marca, precio, descripcion, categoria, imagen);
+                boolean insert = db.insertarProducto(nombre, marca, precio,  descripcion, categoria, imagen);
                 if (insert){
 
                     Toast.makeText(getActivity(), "Guardado", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(),home.class);
-                    startActivity(intent);
+                    Intent i = new Intent(getContext(),home.class);
+                    startActivity(i);
+
+
+                }else{
+
+                    Toast.makeText(getActivity(), "El producto ya existe", Toast.LENGTH_SHORT).show();
+
+                    db.close();
 
                 }
             }
@@ -186,4 +215,32 @@ public class GalleryFragment extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private View.OnClickListener camara = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+                abrirCamara.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    };
+
+    ActivityResultLauncher<Intent> abrirCamara = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == RESULT_OK) {
+                Bundle extras = result.getData().getExtras();
+                if (extras != null) {
+                    Bitmap imagen = (Bitmap) extras.get("data");
+                    if (imagen != null) {
+                        imgProducto.setImageBitmap(imagen);
+                    }
+                }
+            }
+        }
+    });
+
+
 }

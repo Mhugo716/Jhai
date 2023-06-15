@@ -6,13 +6,14 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
 public class DB extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 23;
     private static final String DATABASE_NOMBRE = "jhai.db";
     private static final String TABLE_USUARIOS = "usuario";
 
@@ -45,7 +46,7 @@ public class DB extends SQLiteOpenHelper {
                 "nombreProducto TEXT NOT NULL," +
                 "imgProducto BLOB NOT NULL," +
                 "marca TEXT NOT NULL," +
-                "precio DOUBLE NOT NULL," +
+                "precio INTEGER NOT NULL," +
                 "descripcion TEXT NOT NULL," +
                 "categoria TEXT NOT NULL)");
 
@@ -143,7 +144,7 @@ public class DB extends SQLiteOpenHelper {
 
     public int checkpass(String password, String nombre) {
         SQLiteDatabase database = this.getWritableDatabase();
-        Cursor cursor = database.rawQuery("Select * from usuario Where nombre=? and password = ?", new String[]{nombre, password});
+        Cursor cursor = database.rawQuery("Select * from usuario Where nombre=? and password = ?", new String[]{nombre.trim(), password.trim()});
 
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -163,6 +164,33 @@ public class DB extends SQLiteOpenHelper {
         database.close();
 
         return existe;
+    }
+
+    public boolean contraseñaError(String password){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("Select * from usuario Where password=?", new String[]{password});
+
+        boolean contraseñaIncorrecta = (cursor.getCount() == 0);
+
+        cursor.close();
+        database.close();
+
+        return contraseñaIncorrecta;
+
+    }
+
+
+    public boolean usuarioError(String nombre) {
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM usuario WHERE nombre=?", new String[]{nombre});
+
+        boolean usuarioError = (cursor.getCount() == 0);
+
+        cursor.close();
+        database.close();
+
+        return usuarioError;
+
     }
 
     public boolean insertarProducto(String nombre, String marca, String precio, String descripcion, String categoria, byte[] imagen) {
@@ -420,7 +448,7 @@ public class DB extends SQLiteOpenHelper {
         ArrayList<Datos> listdatos = new ArrayList<>();
         Datos datos = null;
         Cursor cursor = null;
-        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca = ?", new String[]{"avon"});
+        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca LIKE ?", new String[]{"%avon%"});
         if (cursor.moveToFirst()) {
             do {
                 datos = new Datos();
@@ -446,7 +474,7 @@ public class DB extends SQLiteOpenHelper {
         ArrayList<Datos> lisdatos = new ArrayList<>();
         Datos datos = null;
         Cursor cursor = null;
-        cursor = dato.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca = ?", new String[]{"andrea"});
+        cursor = dato.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca LIKE ?", new String[]{"%andrea%"});
         if (cursor.moveToFirst()) {
             do {
                 datos = new Datos();
@@ -472,7 +500,7 @@ public class DB extends SQLiteOpenHelper {
         ArrayList<Datos> lidatos = new ArrayList<>();
         Datos datos = null;
         Cursor cursor = null;
-        cursor = dat.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca = ?", new String[]{"betteware"});
+        cursor = dat.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca LIKE ?", new String[]{"%betteware%"});
         if (cursor.moveToFirst()) {
             do {
                 datos = new Datos();
@@ -498,7 +526,7 @@ public class DB extends SQLiteOpenHelper {
         ArrayList<Datos> lisdatos = new ArrayList<>();
         Datos datos = null;
         Cursor cursor = null;
-        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca = ?", new String[]{"fuller"});
+        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca LIKE ?", new String[]{"%fuller%"});
         if (cursor.moveToFirst()) {
             do {
                 datos = new Datos();
@@ -524,7 +552,7 @@ public class DB extends SQLiteOpenHelper {
         ArrayList<Datos> lisdatos = new ArrayList<>();
         Datos datos = null;
         Cursor cursor = null;
-        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca = ?", new String[]{"vianney"});
+        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca LIKE ?", new String[]{"%vianney%"});
         if (cursor.moveToFirst()) {
             do {
                 datos = new Datos();
@@ -550,7 +578,7 @@ public class DB extends SQLiteOpenHelper {
         ArrayList<Datos> lisdatos = new ArrayList<>();
         Datos datos = null;
         Cursor cursor = null;
-        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca = ?", new String[]{"ilusion"});
+        cursor = date.rawQuery("SELECT * FROM " + TABLE_PRODUCTOS + " WHERE marca LIKE ?", new String[]{"%ilusion%"});
         if (cursor.moveToFirst()) {
             do {
                 datos = new Datos();
@@ -570,11 +598,11 @@ public class DB extends SQLiteOpenHelper {
 
     }
 
-    public boolean modificarUsuario(int id, String nombre, String correo, String password) {
+    public boolean modificarUsuario(int id, String correo, String password) {
         SQLiteDatabase dataB = getWritableDatabase();
         boolean listo;
         try{
-            dataB.execSQL(" UPDATE " + TABLE_USUARIOS + " SET nombre ='" + nombre + "', correo = '" + correo + "',password = '" + password +"' WHERE id = '" + id + "'");
+            dataB.execSQL(" UPDATE " + TABLE_USUARIOS + " SET  correo = '" + correo + "',password = '" + password +"' WHERE id = '" + id + "'");
             listo = true;
         }catch (Exception ex){
             ex.toString();

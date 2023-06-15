@@ -69,6 +69,12 @@ public class datosCliente extends Fragment {
 
             }else{
 
+               if (!verificarTelefono(telefono)) {
+                    Toast.makeText(requireContext(), "El número de teléfono debe tener exactamente 10 dígitos", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
                 boolean datosC = db.insertCliente(nombreCliente, direccion, telefono, referencias);
                 if (datosC){
 
@@ -76,9 +82,21 @@ public class datosCliente extends Fragment {
 
                     Intent intent = new Intent(getContext(), home.class);
                     startActivity(intent);
+
+                }else{
+
+                    Toast.makeText(requireContext(), "Ya se agrego", Toast.LENGTH_SHORT).show();
+
                 }
             }
         }
     };
+
+
+
+
+    private boolean verificarTelefono(String telefono) {
+        return telefono.length() == 10 && telefono.matches("\\d+");
+    }
 
 }

@@ -57,23 +57,38 @@ public class MainActivity extends AppCompatActivity {
 
             }else{
 
-                int verifi = db.checkpass(pass,nombre);//Verifica si el Usuario existe en la Tabla Usuario
-                if(verifi != -1){
+                boolean usuarioError = db.usuarioError(pass);
 
-                    SharedPreferences preferences = getSharedPreferences("jhaisales", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    if (preferences.getInt("id_usuario", -1) != -1){
-                        editor.remove("id_usuario").commit();
-                        editor.apply();
+                if (usuarioError) {
+                    Toast.makeText(MainActivity.this, "Usuario Incorrecto", Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    boolean contraseñaError = db.contraseñaError(pass);
+
+                    if (contraseñaError) {
+                        Toast.makeText(MainActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+
                     }
 
-                    editor.putInt("id_usuario", verifi).commit();
-                    editor.apply();
+                    int verifi = db.checkpass(pass, nombre);//Verifica si el Usuario existe en la Tabla Usuario
+                    if (verifi != -1) {
 
-                    Toast.makeText(MainActivity.this, "Ingreso Exitoso", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,home.class);
-                    startActivity(i);
+                        SharedPreferences preferences = getSharedPreferences("jhaisales", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        if (preferences.getInt("id_usuario", -1) != -1) {
+                            editor.remove("id_usuario").commit();
+                            editor.apply();
+                        }
 
+                        editor.putInt("id_usuario", verifi).commit();
+                        editor.apply();
+
+                        Toast.makeText(MainActivity.this, "Ingreso Exitoso", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity.this, home.class);
+                        startActivity(i);
+
+                    }
                 }
             }
         }

@@ -77,7 +77,8 @@
             android:background="@drawable/styledit"
             android:ems="10"
             android:hint="Telefono"
-            android:inputType="numberDecimal"
+            android:inputType="phone|number"
+            android:maxLength="10"
             android:textAlignment="center" />
 
        <ImageView
@@ -96,7 +97,8 @@
             android:ems="10"
             android:hint="Referencias"
             android:inputType="text"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            />
 
 
         <Button

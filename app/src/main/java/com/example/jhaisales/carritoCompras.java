@@ -178,15 +178,26 @@ public class carritoCompras extends AppCompatActivity {
         String nuevacadena = formattedDate.toUpperCase().replaceAll("[A-Z-:' '.]", "");
 
         for (Datos producto: productos) {
-            db.insertarPedido(producto.getColumna1(),
+
+            int fechaPedido = nuevacadena.hashCode();
+
+            db.insertarPedido(
+                    producto.getColumna1(),
+                    fechaPedido,
+                    producto.getId(),
+                    producto.getColumna5(),
+                    producto.getColumna3(),
+                    producto.getImagen()
+            );
+        }
+            /*db.insertarPedido(producto.getColumna1(),
                     Integer.parseInt(nuevacadena),
                     producto.getId(),
                     producto.getColumna5(),
-                    datos.getColumna3(),
-                    datos.getImagen());
+                    producto.getColumna3(),
+                    producto.getImagen());*/
 
-        }
+
+
     }
-
-
 }
