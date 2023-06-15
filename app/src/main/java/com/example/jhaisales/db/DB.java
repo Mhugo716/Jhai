@@ -166,6 +166,22 @@ public class DB extends SQLiteOpenHelper {
         return existe;
     }
 
+    public boolean correoExistente(String correo){
+
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM usuario WHERE LOWER(correo) = LOWER(?)";
+        String[] selectionArgs = { correo.toLowerCase() };
+        Cursor cursor = database.rawQuery(query, selectionArgs);
+
+        boolean existe = (cursor.getCount() > 0);
+
+        cursor.close();
+        database.close();
+
+        return existe;
+
+    }
+
     public boolean contraseñaError(String password){
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery("Select * from usuario Where password=?", new String[]{password});

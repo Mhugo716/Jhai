@@ -55,24 +55,30 @@ public class registro extends AppCompatActivity {
 
             } else {
 
-                boolean usuarioExistente = db.usuarioExiste(nombre);
-                if (usuarioExistente) {
-                    Toast.makeText(registro.this, "El usuario ya existe", Toast.LENGTH_SHORT).show();
+                    boolean usuarioExistente = db.usuarioExiste(nombre);
+                    if (usuarioExistente) {
+                        Toast.makeText(registro.this, "El usuario ya existe", Toast.LENGTH_SHORT).show();
 
-                } else {
+                    } else {
 
-                    boolean correcto = db.insertUsuario(nombre, correo, pass);//Inserta los datos a la Tabla Usuarios
-                    if (correcto == true) {
+                        boolean correoExistente = db.correoExistente(correo);
+                        if (correoExistente) {
+                            Toast.makeText(registro.this, "El correo ya existe", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(registro.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
-                        login();
+                        } else {
 
+                            boolean correcto = db.insertUsuario(nombre, correo, pass);//Inserta los datos a la Tabla Usuarios
+                            if (correcto == true) {
+
+                                Toast.makeText(registro.this, "Registro Exitoso", Toast.LENGTH_SHORT).show();
+                                login();
+
+                            }
+
+                        }
                     }
-
                 }
             }
-        }
-
     };
 
         public void login() {//Manda a llamar la Pantalla de Inicio de Sesion
